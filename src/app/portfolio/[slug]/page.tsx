@@ -1,71 +1,51 @@
-import { portfolio } from '@/data/portfolio';
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import Image from 'next/image';
+import React from 'react';
 
-// Generate dynamic metadata
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const project = portfolio.find(p => p.slug === params.slug);
-
-  if (!project) {
-    return {
-      title: 'Project Not Found',
-    }
-  }
-
-  return {
-    title: project.title,
-    description: project.description,
-    openGraph: {
-      images: [{ url: project.imageUrl }],
-    },
-  }
-}
-
-// Statically generate routes at build time
-export async function generateStaticParams() {
-  return portfolio.map((project) => ({
-    slug: project.slug,
-  }))
-}
-
-// This is the page component with the corrected type definition
-const PortfolioDetailPage = ({ params }: { params: { slug: string } }) => {
-  const project = portfolio.find(p => p.slug === params.slug);
-
-  if (!project) {
-    notFound();
-  }
-
-  return (
-    <div className="py-16 sm:py-24">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight text-center mb-4">
-          {project.title}
-        </h1>
-        <div className="flex justify-center flex-wrap gap-2 mb-12">
-          {project.tags.map(tag => (
-            <span key={tag} className="bg-dark-purple/50 text-light-purple text-sm font-semibold px-4 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="relative w-full h-96 mb-12 overflow-hidden rounded-lg shadow-2xl shadow-brand-purple/20">
-          <Image
-            src={project.imageUrl}
-            alt={project.title}
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-
-        <div className="prose prose-invert prose-lg max-w-none mx-auto text-gray-300">
-          <p>{project.content}</p>
-        </div>
-      </div>
-    </div>
-  );
+// Define the type for the props that Next.js passes to a dynamic page.
+// The `params` object will contain the dynamic route parameters. In this case, 'slug'.
+// It's also good practice to include `searchParams` even if you don't use them.
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default PortfolioDetailPage;
+// This is your page component.
+// We destructure `params` from the props object to easily access the slug.
+export default function PortfolioDetailpage({ params }: Props) {
+  // Add a check to ensure params and slug are available before destructuring.
+  // This prevents runtime errors in environments where props might not be passed correctly.
+  if (!params || !params.slug) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50 text-gray-800">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Loading...</h1>
+          <p className="text-lg">Waiting for project information.</p>
+        </div>
+      </main>
+    );
+  }
+
+  const { slug } = params;
+
+  // You can now use the 'slug' variable to fetch data or display content.
+  // For example, you could fetch portfolio project details based on this slug.
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50 text-gray-800">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4">Portfolio Project Details</h1>
+        <p className="text-lg mb-2">You are currently viewing the project with slug:</p>
+        <div className="bg-white p-4 rounded-lg shadow-md inline-block">
+          <span className="text-2xl font-mono bg-gray-100 text-blue-600 px-3 py-1 rounded">
+            {slug}
+          </span>
+        </div>
+        <div className="mt-8">
+          <a href="/portfolio" className="text-blue-500 hover:underline">
+            &larr; Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </main>
+  );
+}
+
