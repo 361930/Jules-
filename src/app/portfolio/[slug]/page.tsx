@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 type Props = {
   params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 // Generate dynamic metadata
