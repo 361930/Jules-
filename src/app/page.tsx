@@ -1,7 +1,38 @@
-import HomeClientPage from './HomeClientPage';
+import Link from 'next/link';
 
-const HomePage = () => {
-  return <HomeClientPage />;
-};
+export default function Home() {
+ return (
+   <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-900 text-white">
+     <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+       <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-600 bg-zinc-800/30 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-800 lg:p-4">
+         Get started by editing 
+         <code className="font-mono font-bold">src/app/page.tsx</code>
+       </p>
+     </div>
 
-export default HomePage;
+     <div className="relative z-[-1] flex place-items-center my-16">
+       <h1 className="text-6xl font-bold">Jules' Website</h1>
+     </div>
+
+     <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
+       {/* FIX: Replaced all <a> tags below with <Link> */}
+       <Link
+         href="/portfolio"
+         className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-500 hover:bg-gray-800"
+       >
+         <h2 className="mb-3 text-2xl font-semibold">
+           Portfolio{' '}
+           <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+             ->
+           </span>
+         </h2>
+         <p className="m-0 max-w-[30ch] text-sm opacity-50">
+           Check out the projects I have been working on.
+         </p>
+       </Link>
+
+       {/* --- Other links can go here --- */}
+     </div>
+   </main>
+ );
+     }
