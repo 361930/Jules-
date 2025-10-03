@@ -1,11 +1,12 @@
 import { portfolio } from '@/data/portfolio';
 import { notFound } from 'next/navigation';
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
 type Props = {
-  params: { slug: string }
-}
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 // Generate dynamic metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
