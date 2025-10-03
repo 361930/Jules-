@@ -1,5 +1,5 @@
 "use client";
-import { motion } from 'framer-motion';
+import { motion, Variants, Transition } from 'framer-motion';
 import { services } from '@/data/services';
 import Link from 'next/link';
 
@@ -27,7 +27,7 @@ const icons: { [key: string]: JSX.Element } = {
 };
 
 const ServicesClientPage = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: (i: number) => ({
       opacity: 1,
@@ -40,12 +40,14 @@ const ServicesClientPage = () => {
     }),
   };
 
+  const titleTransition: Transition = { duration: 0.7, ease: "easeOut" };
+
   return (
     <div className="py-16 sm:py-24">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={titleTransition}
         className="text-center mb-16"
       >
         <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Our Services</h1>
