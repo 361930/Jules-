@@ -3,13 +3,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
-type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 // Generate dynamic metadata
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const project = portfolio.find(p => p.slug === params.slug);
 
   if (!project) {
@@ -34,7 +29,8 @@ export async function generateStaticParams() {
   }))
 }
 
-const PortfolioDetailPage = ({ params }: Props) => {
+// This is the page component with the corrected type definition
+const PortfolioDetailPage = ({ params }: { params: { slug: string } }) => {
   const project = portfolio.find(p => p.slug === params.slug);
 
   if (!project) {
