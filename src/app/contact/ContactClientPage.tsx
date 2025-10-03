@@ -12,7 +12,7 @@ const ContactClientPage = () => {
       >
         <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Get In Touch</h1>
         <p className="text-md md:text-lg text-light-purple/80 mt-3 max-w-2xl mx-auto">
-          Have a project in mind or just want to say hello? We'd love to hear from you.
+          Have a project in mind or just want to say hello? We&apos;d love to hear from you.
         </p>
       </motion.div>
 

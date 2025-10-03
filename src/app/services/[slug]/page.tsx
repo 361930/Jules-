@@ -1,17 +1,13 @@
 import { services } from '@/data/services';
 import { notFound } from 'next/navigation';
-import { motion } from 'framer-motion';
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 
 type Props = {
   params: { slug: string }
 }
 
 // Generate dynamic metadata
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = services.find(s => s.slug === params.slug);
 
   if (!service) {

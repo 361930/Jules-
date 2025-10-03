@@ -8,10 +8,7 @@ type Props = {
 }
 
 // Generate dynamic metadata
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = portfolio.find(p => p.slug === params.slug);
 
   if (!project) {
