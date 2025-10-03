@@ -14,7 +14,7 @@ export default function PortfolioPage() {
      <div className="w-full max-w-5xl text-center">
        <h1 className="text-5xl font-extrabold mb-4 text-gray-800">My Work</h1>
        <p className="text-xl text-gray-600 mb-12">
-         A selection of projects that I'm proud of.
+         A selection of projects that I&apos;m proud of.
        </p>
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
          {portfolioItems.map((item) => (
